@@ -1,8 +1,6 @@
 #### Random forest:
 library(randomForestSRC)
-#library(randomForest);
 rm(list=ls());
-#setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
 thresholds = c(1e-05,1e-04,0.001);
 traits = c("Jmax25","Rdlight25","Resistwp25","WUEref","Av_Diameter_mm");
 
@@ -48,10 +46,8 @@ for (threshold in 3:3){
       class(geno_train) <- "numeric";
    
       pheno_valid = as.matrix(pheno_used[validation,,drop=FALSE]);
-      #geno_valid = as.matrix(geno_used[validation,]);
-      # class(geno_valid) <- "numeric";
       poplar_trait = cbind(geno_used,pheno_used);
-      #poplar_trait_train = cbind(geno_train,pheno_train);
+     
       colnames(poplar_trait) = c(paste("X", 1:ncol(geno_used), sep=""),"target");
       #colnames(poplar_trait_train) = c(paste("X", 1:ncol(geno_train), sep=""),"target");
       #poplar_trait_train = data.frame(poplar_trait_train);
