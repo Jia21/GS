@@ -1,7 +1,6 @@
 #### Random forest:
 library(randomForest);
 rm(list=ls());
-#setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
 thresholds = c(1e-05,1e-04,0.001);
 traits = c("Jmax25","Rdlight25","Resistwp25","WUEref","Av_Diameter_mm");
 
