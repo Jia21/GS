@@ -1,4 +1,3 @@
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
 library(rrBLUP);
 rm(list = ls());
 thresholds = c(1e-05,1e-04,0.001);
