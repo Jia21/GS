@@ -1,4 +1,4 @@
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/");
+
 id_to_name <- read.table("id_to_name.txt",header = F);
 id_to_name <- as.matrix(id_to_name);
 sampleid <- read.table("sample_plink_geno",header=F);
@@ -45,7 +45,6 @@ print(nrow(pheno_GT_filter_missGT));
 
 pheno_GT_filter_missGT <- as.matrix(pheno_GT_filter_missGT);
 maf = matrix("NA",nrow = nrow(pheno_GT_filter_missGT),1);
-#########only one genotype????
 for(sl in 1:nrow(pheno_GT_filter_missGT)){
   slice = pheno_GT_filter_missGT[sl,7:ncol(pheno_GT_filter_missGT),drop=FALSE];
   tab = data.frame(table(slice));
@@ -112,7 +111,6 @@ for(i in 1:nrow(genotype)){
 write.table(vcf,"20.VCF.CORMAT.vcf",quote = F,sep="\t",col.names = T,row.names = F);
 
 ####Set up different threshold of p.values####
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
 sig_gwas_loci <- NULL;
 threshold = c(1.00E-05,1.00E-04,1.00E-03,1.00E-02,5.00E-02);
 trait = c("Jmax25","Rdlight25","Resistwp25","WUEref","Av_Diameter_mm");
@@ -135,7 +133,6 @@ for(j in 1:length(trait)){
 
 
 #####Generate genotype and phenotype for GS:
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
 rm(list=ls());
 thresholds = c(1e-05,1e-04,0.001);
 traits = c("Jmax25","Rdlight25","Resistwp25","WUEref","Av_Diameter_mm");
@@ -193,7 +190,7 @@ for (i in 1:length(thresholds)){
       }
       maf[sl] = min(tmp1,tmp2);
     }
-    ##########If one SNP only have heteruzyguos for all samples, remove it!
+    ##########If one SNP only have one heterozygous for all samples, remove it!
     pheno_GT_filter_missGT_MAF = pheno_GT_filter_missGT[maf > 0.05,];
     print(nrow(pheno_GT_filter_missGT_MAF));
     write.table(pheno_GT_filter_missGT_MAF,paste(traits[j],"_",thresholds[i],".geno",sep=""),quote = F,sep = "\t",col.names = T,row.names = F);
