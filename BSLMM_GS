@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -l procs=1,mem=20GB
+#PBS -l walltime=48:00:00
+#PBS -q $name_cluster
+
+cd $PBS_O_WORKDIR
+
+for pheno in {1..1000}
+do
+	echo $pheno
+	gemma -bfile $trait -n $pheno -gk 1 -o $trait".RM."$pheno
+	gemma -bfile $trait -n $pheno -bslmm 1 -o $trait.$pheno
+	gemma -bfile $trait -n $pheno -epm "./output/"$trait.$pheno".param.txt" -emu "./output/"$trait.$pheno".log.txt" -ebv "./output/"$trait.$pheno".bv.txt" -k "./output/"$trait".RM."$pheno".cXX.txt" -predict 1 -o $trait".res."$pheno
+done
