@@ -1,4 +1,4 @@
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/GS_data-03272018_Wellington/geno_pheno/");
+#Threshold of p.value is 1e-05:
 #install.packages("rrBLUP");
 #install.packages("BGLR");
 library(rrBLUP);
@@ -76,7 +76,6 @@ write.table(predict_accuracy_pval_iter,"predict_accuracy_pval_iter_Jmax25_rrBlup
 ####
 library(BGLR);
 rm(list=ls());
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/");
 geno <- read.table("Jmax25.geno",header = T);
 pheno <- read.table("pheno_Jmax25",header = T);
 
@@ -154,7 +153,6 @@ write.table(predict_accuracy_pval_iter,"predict_accuracy_pval_iter_Jmax25_BL",qu
 
 #### Random forest:
 library(randomForest);
-setwd("~/Dropbox (UNC Charlotte)/poplar_gwas_data/");
 #install.packages("rrBLUP");
 #install.packages("BGLR");
 rm(list = ls());
