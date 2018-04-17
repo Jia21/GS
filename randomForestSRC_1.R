@@ -1,4 +1,5 @@
 #### Random forest:
+#### It seems package "randomForest" can't handle more than 20k features in the model, so we turn to use randomForestSRC to apply random forest algorithm. 
 library(randomForestSRC)
 rm(list=ls());
 thresholds = c(1e-05,1e-04,0.001);
