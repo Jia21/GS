@@ -5,8 +5,8 @@ rm(list=ls());
 thresholds = c(1e-05,1e-04,0.001);
 traits = c("Jmax25","Rdlight25","Resistwp25","WUEref","Av_Diameter_mm");
 
-for (threshold in 3:3){
-  for(trait in 4:4){
+for (threshold in 1:length(thresholds){
+  for(trait in 1:length(traits){
     cat("threshold is",thresholds[threshold],";trait is",traits[trait],"\n");
     geno <- read.table(paste(traits[trait],"_",thresholds[threshold],".geno",sep=""),header = T);
     pheno <- read.table(paste("pheno_",traits[trait],"_",thresholds[threshold],sep=""),header = T);
@@ -53,7 +53,7 @@ for (threshold in 3:3){
       #colnames(poplar_trait_train) = c(paste("X", 1:ncol(geno_train), sep=""),"target");
       #poplar_trait_train = data.frame(poplar_trait_train);
       
-      set.seed(131);
+      #set.seed(131);
       pheno_trait_res = rfsrc(target ~ .,data = poplar_trait[train,],forest = TRUE,ntree=500);
       pred<-predict(pheno_trait_res,poplar_trait[-train,]);
       bias = matrix(pred$predicted,ncol=1) - pheno_valid;
@@ -68,9 +68,9 @@ for (threshold in 3:3){
     
     bias_final = colMeans(predict_accuracy_iter_bias);
 
-    write.table(predict_accuracy_iter,paste("predict_accuracy_iter_",traits[trait],"_",thresholds[threshold],"_RFSRC_1-500",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
-    write.table(predict_accuracy_iter_bias,paste("predict_accuracy_iter_bias_",traits[trait],"_",thresholds[threshold],"_RFSRC_1-500",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
-    write.table(bias_final,paste("bias_final_",traits[trait],"_",thresholds[threshold],"_RFSCR_1-500",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
-    write.table(predict_accuracy_pval_iter,paste("predict_accuracy_pval_iter_",traits[trait],"_",thresholds[threshold],"_RFSRC_1-500",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
+    write.table(predict_accuracy_iter,paste("predict_accuracy_iter_",traits[trait],"_",thresholds[threshold],"_RFSRC",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
+    write.table(predict_accuracy_iter_bias,paste("predict_accuracy_iter_bias_",traits[trait],"_",thresholds[threshold],"_RFSRC",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
+    write.table(bias_final,paste("bias_final_",traits[trait],"_",thresholds[threshold],"_RFSRC",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
+    write.table(predict_accuracy_pval_iter,paste("predict_accuracy_pval_iter_",traits[trait],"_",thresholds[threshold],"_RFSRC",sep=""),quote = F,sep="\t",col.names = F,row.names = F);
   }
 }
