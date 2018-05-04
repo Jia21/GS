@@ -1,0 +1,1 @@
+The result deposited here is for the trait DBH. We use 3-fold cross validation and run 10 times to select the minimum mean squared error for final predicted phenotpe.
